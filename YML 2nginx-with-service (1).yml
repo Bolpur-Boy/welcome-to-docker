@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: nginx-a
-  namespace: netpol-demo
+  namespace: default
   labels:
     app: nginx-a
 spec:
@@ -15,7 +15,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: nginx-b
-  namespace: netpol-demo
+  namespace: default
   labels:
     app: nginx-b
 spec:
@@ -27,7 +27,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx-a
-  namespace: netpol-demo
+  namespace: default
 spec:
   selector:
     app: nginx-a
@@ -39,7 +39,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx-b
-  namespace: netpol-demo
+  namespace: default
 spec:
   selector:
     app: nginx-b
@@ -55,7 +55,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: deny-all-to-nginx-b
-  namespace: netpol-demo
+  namespace: default
 spec:
   podSelector:
     matchLabels:
@@ -71,7 +71,7 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: allow-from-nginx-a
-  namespace: netpol-demo
+  namespace: default
 spec:
   podSelector:
     matchLabels:
