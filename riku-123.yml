@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: Riku
+  labels:
+        app: Riku
+spec:
+  containers:
+  - name: Riku
+    image: Riku:latest
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: Riku
+  namespace: default
+  labels:
+    app: Riku
+ 
+spec:
+  externalTrafficPolicy: Local
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: Riku
+  type: LoadBalancer
