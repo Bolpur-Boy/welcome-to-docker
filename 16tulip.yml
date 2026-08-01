@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dalo
+  labels:
+        app: dalo
+spec:
+  containers:
+  - name: dalo
+    image: honeybee.azurecr.io/repo1:tulip
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dalo
+  namespace: default
+  labels:
+    app: dalo
+ 
+spec:
+  externalTrafficPolicy: Local
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: dalo
+  type: LoadBalancer
