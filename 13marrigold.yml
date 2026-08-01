@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bunty
+  labels:
+        app: bunty
+spec:
+  containers:
+  - name: bunty
+    image: honeybee.azurecr.io/repo2:marrigold
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bunty
+  namespace: default
+  labels:
+    app: bunty
+ 
+spec:
+  externalTrafficPolicy: Local
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: bunty
+  type: LoadBalancer
